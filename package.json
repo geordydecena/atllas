@@ -1,0 +1,30 @@
+{
+  "name": "takehome",
+  "scripts": {
+    "start": "node scripts/run.mjs",
+    "seed": "ts-node --transpileOnly scripts/seed.ts",
+    "seed-prod": "ts-node --transpileOnly scripts/seed.ts --full",
+    "bundle": "node scripts/bundle.mjs",
+    "prepare-submission": "node scripts/bundle.mjs",
+    "lint": "eslint ."
+  },
+  "workspaces": [
+    "packages/front-end",
+    "packages/back-end"
+  ],
+  "devDependencies": {
+    "@faker-js/faker": "^7.6.0",
+    "concurrently": "^7.6.0",
+    "cross-env": "^7.0.3",
+    "eslint": "^8.53.0",
+    "eslint-config-next": "^14.0.1",
+    "nodemon": "^2.0.20",
+    "typescript": "^5.2.2"
+  },
+  "dependencies": {
+    "axios": "^1.6.0",
+    "express-validator": "^7.0.1",
+    "lru-cache": "^10.0.1",
+    "sequelize": "^6.33.0"
+  }
+}
