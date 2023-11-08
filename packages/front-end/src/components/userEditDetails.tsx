@@ -1,12 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import { UserInput } from './userInput';
 import { displayFieldName, groupFields } from '../utils/utils';
+import Link from 'next/link'
+import { ALL_FIELDS } from '../constants/constants';
 
-const EditUserDetails = ({ fields, editUserData, setEditUserData, saveUser, showEdit }) => {
+const UserEditDetails = ({ fields, editUserData, setEditUserData, saveUser }) => {
     const [groupedFields, setGroupedFields] = useState([]);
 
     useEffect(() => {
-        setGroupedFields(groupFields(fields.additional, fields.header.length));
+        setGroupedFields(groupFields(ALL_FIELDS, fields.header.length));
     }, [fields]);
 
     const handleSaveUser = (e) => {
@@ -15,22 +17,9 @@ const EditUserDetails = ({ fields, editUserData, setEditUserData, saveUser, show
     };
 
     return (
-        <form onSubmit={(e) => handleSaveUser(e)} className="mb-1">
+        <form onSubmit={(e) => handleSaveUser(e)} className="mb-1 max-h-[100vh] overflow-y-auto pb-[40vh]">
             <table className="table-fixed w-full h-full border">
                 <tbody>
-                    <tr>
-                        {fields.header.map((field, index) =>
-                            <td key={index} className={`p-4 align-top w-1/${fields.header.length}`}>
-                                <div className="p-2 w-full">
-                                    <UserInput
-                                        field={field}
-                                        inputData={editUserData}
-                                        setInputData={setEditUserData}
-                                    />
-                                </div>
-                            </td>
-                        )}
-                    </tr>
                     {groupedFields.map((group, index) =>
                         <tr key={index}>
                             {group.map((field, index) =>
@@ -55,9 +44,9 @@ const EditUserDetails = ({ fields, editUserData, setEditUserData, saveUser, show
                                 <button type="submit" className="bg-blue-500 text-white px-2 py-1 rounded ml-2">
                                     Save
                                 </button>
-                                <div onClick={() => showEdit(false)} className="bg-red-500 text-white px-2 py-1 rounded ml-2">
+                                <Link href="/" className="bg-red-500 text-white px-2 py-1 rounded ml-2">
                                     Cancel
-                                </div>
+                                </Link>
                             </div>
                         </td>
                     </tr>
@@ -67,4 +56,4 @@ const EditUserDetails = ({ fields, editUserData, setEditUserData, saveUser, show
     );
 };
 
-export default EditUserDetails;
+export default UserEditDetails;

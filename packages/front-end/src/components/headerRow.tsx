@@ -1,21 +1,8 @@
 import React from 'react';
 import HeaderField from './headerField';
+import Link from 'next/link'
 
-const HeaderRow = ({ fields, searchQuery, setSearchQuery, setFields, setShowSpinner, setNewUserData, setShowNewUser }) => {
-    const createNewUser = () => {
-        setNewUserData({
-            firstName: null,
-            middleName: null,
-            lastName: null,
-            email: null,
-            phoneNumber: null,
-            address: null,
-            adminNotes: null,
-            registered: new Date()
-        });
-        setShowNewUser(true);
-    };
-
+const HeaderRow = ({ fields, searchQuery, setSearchQuery, setFields, setShowSpinner }) => {
     return (
         <th colSpan={fields.header.length}>
             <div className="relative border flex mb-1 h-12">
@@ -34,13 +21,11 @@ const HeaderRow = ({ fields, searchQuery, setSearchQuery, setFields, setShowSpin
                 )}
                 <div className="absolute h-50 w-50 top-2 right-3">
                     <div className="float-left flex items-center">
-                        <a onClick={() => createNewUser()}>
-                            <div className="plusButton bg-green-500 rounded"></div>
-                        </a>
+                        <Link href={{ pathname: '/newUser' }} className="plusButton bg-green-500 rounded"></Link>
                     </div>
                 </div>
             </div>
-        </th>
+        </th >
     );
 };
 

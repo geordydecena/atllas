@@ -1,10 +1,9 @@
 import React from 'react';
 import axios from 'axios';
 import { useState, useRef, useEffect } from 'react';
-import { getErrorMessage, removeObjEmptyValues } from '../utils/utils';
+import { getErrorMessage } from '../utils/utils';
 import { HEADER_FIELDS, ALL_FIELDS } from '../constants/constants';
 import HeaderRow from './headerRow';
-import UserEditDetails from './userEditDetails';
 import UserRow from './userRow';
 import SearchBar from './searchBar';
 import UserCount from './userCount';
@@ -13,8 +12,6 @@ import Spinner from './spinner';
 
 const UserList = () => {
     const [users, setUsers] = useState([]);
-    const [newUserData, setNewUserData] = useState({});
-    const [showNewUser, setShowNewUser] = useState(false);
     const [userCount, setUserCount] = useState(0);
     const [menuOpenId, setMenuOpenId] = useState(null);
     const [showSpinner, setShowSpinner] = useState(true);
@@ -78,24 +75,6 @@ const UserList = () => {
         }
     };
 
-    const addUser = async () => {
-        try {
-            const { data: { data } } = await axios.post('/api/addUser', removeObjEmptyValues(newUserData));
-            setUsers([data, ...users]);
-            setUserCount(userCount + 1);
-            setShowNewUser(false);
-            setMessageModalData({
-                message: 'User added!',
-                isSuccess: true
-            });
-        } catch (e) {
-            setMessageModalData({
-                message: getErrorMessage(e),
-                isSuccess: false
-            });
-        }
-    }
-
     return (
         <div className="relative">
             {messageModalData.message && (
@@ -112,7 +91,7 @@ const UserList = () => {
                 />
                 {showSpinner ? <Spinner /> : <UserCount userCount={userCount} />}
             </div>
-            <table className={showNewUser ? "w-full border-collapse" : "w-full border-collapse"}>
+            <table className="w-full border-collapse">
                 <thead>
                     <tr className="flex-1">
                         <HeaderRow
@@ -121,8 +100,6 @@ const UserList = () => {
                             setSearchQuery={setSearchQuery}
                             setFields={setFields}
                             setShowSpinner={setShowSpinner}
-                            setNewUserData={setNewUserData}
-                            setShowNewUser={setShowNewUser}
                         />
                     </tr>
                 </thead>
@@ -130,19 +107,6 @@ const UserList = () => {
             <div className="max-h-[100vh] overflow-y-auto pb-[40vh]" ref={scrollRef}>
                 <table className="w-full border-collapse">
                     <tbody>
-                        {showNewUser &&
-                            <tr>
-                                <td colSpan={fields.header.length}>
-                                    <UserEditDetails
-                                        fields={fields}
-                                        editUserData={newUserData}
-                                        setEditUserData={setNewUserData}
-                                        saveUser={addUser}
-                                        showEdit={setShowNewUser}
-                                    />
-                                </td>
-                            </tr>
-                        }
                         {!showSpinner && users.map((user) =>
                             <tr key={user.id}>
                                 <UserRow

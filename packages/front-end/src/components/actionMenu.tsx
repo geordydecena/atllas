@@ -1,14 +1,15 @@
 import React from 'react';
+import Link from 'next/link'
 
-const ActionMenu = ({ menuOpenId, setMenuOpenId, user, showEdit, deleteUser }) => {
+const ActionMenu = ({ menuOpenId, setMenuOpenId, user, deleteUser }) => {
     return (
         <div className="absolute h-full top-2 right-0">
             <div onClick={() => setMenuOpenId(menuOpenId === user.id ? null : user.id)}>
                 {menuOpenId === user.id &&
                     <div className="float-left flex items-center">
-                        <a className="bg-blue-500 text-white px-2 py-1 rounded mr-2 cursor-pointer" onClick={() => showEdit(true)}>
+                        <Link href={{ pathname: '/newUser', query: { id: user.id } }} className="bg-blue-500 text-white px-2 py-1 rounded mr-2 cursor-pointer">
                             Edit
-                        </a>
+                        </Link>
                         <a className="bg-red-500 text-white px-2 py-1 rounded mr-3 cursor-pointer" onClick={() => deleteUser()}>
                             Delete
                         </a>

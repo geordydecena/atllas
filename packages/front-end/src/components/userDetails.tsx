@@ -3,7 +3,7 @@ import axios from 'axios';
 import { ALL_FIELDS } from '../constants/constants';
 import { getErrorMessage, displayFieldName, displayFieldValue, groupFields } from '../utils/utils';
 
-const UserDetails = ({ user, fields, userDetails, setEditUserData, setUserDetails, setMessageModalData }) => {
+const UserDetails = ({ user, fields, userDetails, setUserDetails, setMessageModalData }) => {
     const [showDetails, setShowDetails] = useState(false);
     const [groupedFields, setGroupedFields] = useState([]);
 
@@ -14,7 +14,6 @@ const UserDetails = ({ user, fields, userDetails, setEditUserData, setUserDetail
     const getUserDetails = async () => {
         try {
             const { data: details } = await axios.post('/api/getUserDetails', { id: user.id, attributes: ALL_FIELDS });
-            setEditUserData({ ...details.data });
             setUserDetails({ ...details.data });
         } catch (e) {
             setMessageModalData({
