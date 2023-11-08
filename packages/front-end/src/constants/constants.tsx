@@ -14,3 +14,4 @@ export const HEADER_FIELDS = ['firstName', 'lastName', 'email'];
 export const EDITABLE_FIELDS = ['firstName', 'lastName', 'email', 'middleName', 'phoneNumber', 'address', 'adminNotes'];
 export const DATE_FIELDS = ['registered'];
 export const REQUIRED_FIELDS = ['firstName', 'lastName', 'email', 'adminNotes'];
+export const MAX_DISPLAY_LENGTH = 20;

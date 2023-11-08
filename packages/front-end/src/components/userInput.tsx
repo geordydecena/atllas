@@ -5,6 +5,7 @@ import { getPlaceHolder, displayFieldValue } from '../utils/utils';
 export const UserInput = ({ field, inputData, setInputData }) => {
     return (
         <input
+            id={field}
             type="text"
             name={field}
             readOnly={!EDITABLE_FIELDS.includes(field)}

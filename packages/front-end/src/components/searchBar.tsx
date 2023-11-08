@@ -12,6 +12,7 @@ const SearchBar = ({ searchQuery, setSearchQuery, setShowSpinner }) => {
 
     return (
         <input
+            id={searchQuery.field}
             type="text"
             placeholder="Search Users"
             value={searchQuery.search}

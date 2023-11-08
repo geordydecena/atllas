@@ -24,6 +24,8 @@ const SortButton = ({ searchQuery, setSearchQuery, initialField, fields, column,
     return (
         <div className="py-1 px-2 flex items-center w-50 mr-8 font-bold">
             <select
+                id={sortDetails.field}
+                autoComplete="off"
                 value={sortDetails.field}
                 onChange={(e) => handleChangeField(e.target.value, true)}
                 className="border rounded py-1 px-2 m-1 h-8 w-40 cursor-pointer"
