@@ -21,7 +21,7 @@ const UserRow = ({ user, setUsers, menuOpenId, setMenuOpenId, setUserCount, fiel
                 message: getErrorMessage(e),
                 isSuccess: false
             });
-        };
+        }
     };
 
     const handleShowEdit = async (show) => {
@@ -43,7 +43,7 @@ const UserRow = ({ user, setUsers, menuOpenId, setMenuOpenId, setUserCount, fiel
                 message: getErrorMessage(e),
                 isSuccess: false
             });
-        };
+        }
     };
 
     const updateUser = async () => {
@@ -63,7 +63,7 @@ const UserRow = ({ user, setUsers, menuOpenId, setMenuOpenId, setUserCount, fiel
                 message: getErrorMessage(e),
                 isSuccess: false
             });
-        };
+        }
     };
 
     return (

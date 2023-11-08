@@ -72,7 +72,7 @@ const UsersRouter: IRoute = {
               users: []
             }
           });
-        };
+        }
 
         const users = await User.findAll({
           where: whereClause,

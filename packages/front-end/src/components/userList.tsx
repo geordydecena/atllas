@@ -51,7 +51,7 @@ const UserList = () => {
             return () => {
                 window.removeEventListener('resize', handleResize);
             };
-        };
+        }
     }, []);
 
     useEffect(() => {
@@ -75,7 +75,7 @@ const UserList = () => {
                 message: getErrorMessage(e),
                 isSuccess: false
             });
-        };
+        }
     };
 
     const addUser = async () => {

@@ -21,13 +21,13 @@ const UserDetails = ({ user, fields, userDetails, setEditUserData, setUserDetail
                 message: getErrorMessage(e),
                 isSuccess: false
             });
-        };
+        }
     };
 
     const handleShowDetails = async () => {
         if (!showDetails) {
             await getUserDetails();
-        };
+        }
         setShowDetails((prev) => !prev);
     };
 
