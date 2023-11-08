@@ -48,7 +48,7 @@ export const removeObjEmptyValues = (obj) => {
     const objFiltered = Object.fromEntries(
         Object.entries(obj).filter(([, value]) => {
             if (value === null) {
-                return true;
+                return false;
             }
             if (typeof value === 'string' && value.trim() === '') {
                 return false;
