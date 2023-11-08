@@ -1,7 +1,7 @@
 import React from 'react';
 import axios from 'axios';
 import { useState, useRef, useEffect } from 'react';
-import { getErrorMessage } from '../utils/utils';
+import { getErrorMessage, removeObjEmptyValues } from '../utils/utils';
 import { HEADER_FIELDS, ALL_FIELDS } from '../constants/constants';
 import HeaderRow from './headerRow';
 import UserEditDetails from './userEditDetails';
@@ -80,10 +80,7 @@ const UserList = () => {
 
     const addUser = async () => {
         try {
-            const newUserDataFiltered = Object.fromEntries(
-                Object.entries(newUserData).filter(([, value]) => (value !== null || (typeof value === 'string' && (value as string).trim() !== '')))
-            );
-            const { data: { data } } = await axios.post('/api/addUser', newUserDataFiltered);
+            const { data: { data } } = await axios.post('/api/addUser', removeObjEmptyValues(newUserData));
             setUsers([data, ...users]);
             setUserCount(userCount + 1);
             setShowNewUser(false);

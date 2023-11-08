@@ -43,3 +43,18 @@ export const groupFields = (fields, groupSize) => {
     }, []);
     return groups;
 };
+
+export const removeObjEmptyValues = (obj) => {
+    const objFiltered = Object.fromEntries(
+        Object.entries(obj).filter(([, value]) => {
+            if (value === null) {
+                return true;
+            }
+            if (typeof value === 'string' && value.trim() === '') {
+                return false;
+            }
+            return true;
+        })
+    );
+    return objFiltered;
+};

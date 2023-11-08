@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import { ALL_FIELDS } from '../constants/constants';
-import { getErrorMessage } from '../utils/utils';
+import { getErrorMessage, removeObjEmptyValues } from '../utils/utils';
 import UserEditDetails from './userEditDetails';
 import UserDetails from './userDetails';
 import ActionMenu from './actionMenu';
@@ -48,10 +48,7 @@ const UserRow = ({ user, setUsers, menuOpenId, setMenuOpenId, setUserCount, fiel
 
     const updateUser = async () => {
         try {
-            const editUserDataFiltered = Object.fromEntries(
-                Object.entries(editUserData).filter(([, value]) => (value !== null || (typeof value === 'string' && (value as string).trim() !== '')))
-            );
-            await axios.post('/api/updateUser', editUserDataFiltered);
+            await axios.post('/api/updateUser', removeObjEmptyValues(editUserData));
             setUserDetails(editUserData);
             setShowEdit(false);
             setMessageModalData({
