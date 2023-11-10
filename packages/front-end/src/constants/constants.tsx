@@ -1,4 +1,5 @@
-export const localServerURL = 'http://127.0.0.1:50000';
+export const LOCAL_SERVER_URL = 'http://127.0.0.1:50000';
+export const SEARCH_CACHE_KEY = 'SEARCH_KEY';
 export const FIELD_KEY_TO_FIELD_DISPLAY = {
     firstName: 'First Name',
     middleName: 'Middle Name',
@@ -15,3 +16,5 @@ export const EDITABLE_FIELDS = ['firstName', 'lastName', 'email', 'middleName', 
 export const DATE_FIELDS = ['registered'];
 export const REQUIRED_FIELDS = ['firstName', 'lastName', 'email', 'adminNotes'];
 export const MAX_DISPLAY_LENGTH = 20;
+export const MAX_SCROLL_THRESHOLD = 1;
+export const NUM_ROWS = 20;

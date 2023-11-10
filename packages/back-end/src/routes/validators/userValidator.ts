@@ -15,12 +15,7 @@ export const searchSchema = checkSchema({
         in: ['body'],
         isBoolean: true,
         optional: false,
-    },
-    attributes: {
-        in: ['body'],
-        isArray: true,
-        optional: false,
-    },
+    }
 });
 
 export const addSchema = checkSchema({
@@ -123,18 +118,5 @@ export const deleteSchema = checkSchema({
         in: ['body'],
         isInt: true,
         optional: false,
-    },
-});
-
-export const detailsSchema = checkSchema({
-    id: {
-        in: ['body'],
-        isInt: true,
-        optional: false,
-    },
-    attributes: {
-        in: ['body'],
-        isArray: true,
-        optional: true,
     },
 });

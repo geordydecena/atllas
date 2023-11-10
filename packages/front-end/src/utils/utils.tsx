@@ -26,12 +26,12 @@ export const displayFieldValue = (field, value, showDetails, isInput) => {
     }
 };
 
-export const getPlaceHolder = (field) => {
+export const getLabel = (field) => {
     return displayFieldName(field) + (REQUIRED_FIELDS.includes(field) ? ' *' : '');
 };
 
 export const groupFields = (fields, groupSize) => {
-    const groups = fields.reduce((result, field, index) => {
+    return fields.reduce((result, field, index) => {
         const chunkIndex = Math.floor(index / groupSize);
 
         if (!result[chunkIndex]) {
@@ -41,11 +41,10 @@ export const groupFields = (fields, groupSize) => {
         result[chunkIndex][index % groupSize] = field;
         return result;
     }, []);
-    return groups;
 };
 
 export const removeObjEmptyValues = (obj) => {
-    const objFiltered = Object.fromEntries(
+    return Object.fromEntries(
         Object.entries(obj).filter(([, value]) => {
             if (value === null) {
                 return false;
@@ -56,5 +55,4 @@ export const removeObjEmptyValues = (obj) => {
             return true;
         })
     );
-    return objFiltered;
 };

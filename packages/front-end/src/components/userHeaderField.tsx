@@ -3,7 +3,7 @@ import { ALL_FIELDS } from '../constants/constants';
 import { displayFieldName } from '../utils/utils';
 
 
-const SortButton = ({ searchQuery, setSearchQuery, initialField, fields, column, setFields, setShowSpinner }) => {
+const UserHeaderField = ({ searchQuery, setSearchQuery, initialField, headerFields, column, setHeaderFields, setShowSpinner }) => {
     const [sortDetails, setSortDetails] = useState({ field: initialField, asc: true });
 
     const handleChangeField = (field, asc) => {
@@ -11,13 +11,10 @@ const SortButton = ({ searchQuery, setSearchQuery, initialField, fields, column,
         setSearchQuery({ ...searchQuery, field, asc });
         setSortDetails({ field, asc });
 
-        setFields((prev) => {
-            const newHeaderFields = prev.header;
+        setHeaderFields((prev) => {
+            const newHeaderFields = prev;
             newHeaderFields[column] = field;
-            return {
-                header: newHeaderFields,
-                additional: ALL_FIELDS.filter(field => !newHeaderFields.includes(field))
-            };
+            return newHeaderFields;
         });
     };
 
@@ -33,7 +30,7 @@ const SortButton = ({ searchQuery, setSearchQuery, initialField, fields, column,
                 <option key={initialField} value={initialField}>
                     {displayFieldName(initialField)}
                 </option>
-                {ALL_FIELDS.filter(field => !fields.header.includes(field)).map((field) => (
+                {ALL_FIELDS.filter(field => !headerFields.includes(field)).map((field) => (
                     <option key={field} value={field}>
                         {displayFieldName(field)}
                     </option>
@@ -46,4 +43,4 @@ const SortButton = ({ searchQuery, setSearchQuery, initialField, fields, column,
     );
 };
 
-export default SortButton;
+export default UserHeaderField;

@@ -17,7 +17,7 @@ const SearchBar = ({ searchQuery, setSearchQuery, setShowSpinner }) => {
             placeholder="Search Users"
             value={searchQuery.search}
             onChange={(e) => changeSearch(e.target.value)}
-            className="border rounded p-2 ml-0.5 h-8 w-40 inline-block"
+            className="border outline-none rounded p-2 ml-0.5 h-8 w-40 inline-block"
         />
     );
 };

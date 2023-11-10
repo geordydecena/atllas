@@ -4,7 +4,7 @@ import { Op } from 'sequelize';
 import { User } from '../services/db';
 import IRoute from '../types/IRoute';
 import { getErrorMessage } from '../utils/utils';
-import { searchSchema, addSchema, updateSchema, deleteSchema, detailsSchema } from './validators/userValidator';
+import { searchSchema, addSchema, updateSchema, deleteSchema } from './validators/userValidator';
 
 
 const UsersRouter: IRoute = {
@@ -33,7 +33,7 @@ const UsersRouter: IRoute = {
         if (!errors.isEmpty()) {
           throw new Error('Failed to validate request body');
         }
-        const { search, field, asc, attributes } = matchedData(req, { locations: ['body'], includeOptionals: true });
+        const { search, field, asc } = matchedData(req, { locations: ['body'], includeOptionals: true });
 
         const whereClause = {
           [Op.or]: [
@@ -77,7 +77,6 @@ const UsersRouter: IRoute = {
         const users = await User.findAll({
           where: whereClause,
           order: [[field || 'id', (asc ? 'asc' : 'desc')]],
-          attributes: ['id', ...attributes]
         });
 
         return res.json({
@@ -166,36 +165,6 @@ const UsersRouter: IRoute = {
         });
 
         await user.save();
-        return res.status(200).json({
-          success: true,
-          data: user
-        });
-      } catch (e) {
-        console.log(e);
-        res.status(400).json({
-          success: false,
-          message: getErrorMessage(e.errors?.[0] || e),
-        });
-      }
-    });
-
-    router.post('/details', detailsSchema, async (req: Request, res: Response) => {
-      try {
-        const errors = validationResult(req);
-        if (!errors.isEmpty()) {
-          throw new Error('Failed to validate request body.');
-        }
-        const { id, attributes } = matchedData(req, { locations: ['body'], includeOptionals: true });
-
-        const user = await User.findOne({
-          where: { id },
-          attributes: ['id', ...attributes]
-        });
-
-        if (!user) {
-          throw new Error('Failed to find user details');
-        }
-
         return res.status(200).json({
           success: true,
           data: user

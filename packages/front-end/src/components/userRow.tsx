@@ -1,47 +1,22 @@
-import React, { useState } from 'react';
-import axios from 'axios';
-import { getErrorMessage } from '../utils/utils';
-import UserDetails from './userDetails';
-import ActionMenu from './actionMenu';
+import { displayFieldValue } from '../utils/utils';
 
-const UserRow = ({ user, setUsers, menuOpenId, setMenuOpenId, setUserCount, fields, setMessageModalData }) => {
-    const [userDetails, setUserDetails] = useState(user);
-
-    const deleteUser = async () => {
-        try {
-            await axios.post('/api/deleteUser', { id: userDetails.id });
-            setUserCount((prev) => (prev - 1));
-            setUsers((prev) => (prev.filter(user => user.id !== userDetails.id)));
-            setMessageModalData({
-                message: 'User deleted!',
-                isSuccess: true
-            });
-        } catch (e) {
-            setMessageModalData({
-                message: getErrorMessage(e),
-                isSuccess: false
-            });
-        }
-    };
-
+const UserRow = ({ user, headerFields, setUserDetails }) => {
     return (
-        <td colSpan={fields.header.length}>
-            <div className="relative mb-1">
-                <UserDetails
-                    user={user}
-                    fields={fields}
-                    userDetails={userDetails}
-                    setUserDetails={setUserDetails}
-                    setMessageModalData={setMessageModalData}
-                />
-                <ActionMenu
-                    menuOpenId={menuOpenId}
-                    setMenuOpenId={setMenuOpenId}
-                    user={user}
-                    deleteUser={deleteUser}
-                />
-            </div>
-        </td>
+        <td colSpan={headerFields.length}>
+            <table className='table-fixed w-full border mb-1'>
+                <tbody>
+                    <tr>
+                        {headerFields.map((field, index) =>
+                            <td key={index} className={`pl-5 align-center w-1/${headerFields.length}`} onClick={() => setUserDetails(user)}>
+                                <div key={field} className="p-2 w-full h-full inline-block">
+                                    <p className="text-gray-800 whitespace-normal break-words whitespace-wrap">{displayFieldValue(field, user[field], false, false)}</p>
+                                </div>
+                            </td>
+                        )}
+                    </tr>
+                </tbody>
+            </table>
+        </td >
     );
 };
 
